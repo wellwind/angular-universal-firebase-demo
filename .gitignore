@@ -4,9 +4,11 @@
 /dist
 /tmp
 /out-tsc
+/functions/public
 
 # dependencies
 /node_modules
+/functions/node_modules
 
 # IDEs and editors
 /.idea
