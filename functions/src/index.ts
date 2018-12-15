@@ -9,7 +9,34 @@ import { join } from 'path';
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 
+const isBot = req => {
+  /**
+   * A default set of user agent patterns for bots/crawlers that do not perform
+   * well with pages that require JavaScript.
+   */
+  const botUserAgents = [
+    'baiduspider',
+    'bingbot',
+    'embedly',
+    'facebookexternalhit',
+    'linkedinbot',
+    'outbrain',
+    'pinterest',
+    'quora link preview',
+    'rogerbot',
+    'showyoubot',
+    'slackbot',
+    'twitterbot',
+    'vkShare',
+    'W3C_Validator',
+    'whatsapp'
+  ];
 
+  const userAgentPattern = new RegExp(botUserAgents.join('|'), 'i');
+
+  let ua = req.headers['user-agent'];
+  return ua !== undefined && userAgentPattern.test(ua);
+};
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -22,15 +49,19 @@ const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'public/browser');
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('../public/server/main');
+const {
+  AppServerModuleNgFactory,
+  LAZY_MODULE_MAP
+} = require('../public/server/main');
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-app.engine('html', ngExpressEngine({
-  bootstrap: AppServerModuleNgFactory,
-  providers: [
-    provideModuleMap(LAZY_MODULE_MAP)
-  ]
-}));
+app.engine(
+  'html',
+  ngExpressEngine({
+    bootstrap: AppServerModuleNgFactory,
+    providers: [provideModuleMap(LAZY_MODULE_MAP)]
+  })
+);
 
 app.set('view engine', 'html');
 app.set('views', DIST_FOLDER);
@@ -38,13 +69,20 @@ app.set('views', DIST_FOLDER);
 // Example Express Rest API endpoints
 // app.get('/api/**', (req, res) => { });
 // Server static files from /browser
-app.get('*.*', express.static(DIST_FOLDER, {
-  maxAge: '1y'
-}));
+app.get(
+  '*.*',
+  express.static(DIST_FOLDER, {
+    maxAge: '1y'
+  })
+);
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
-  res.render('index', { req });
+  if (isBot(req)) {
+    res.render('index', { req });
+  } else {
+    res.sendFile('index.html', { root: './public/browser' });
+  }
 });
 
 // Start up the Node server
