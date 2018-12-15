@@ -1,0 +1,34 @@
+[debug] [2018-12-15T07:18:06.293Z] ----------------------------------------------------------------------
+[debug] [2018-12-15T07:18:06.295Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only hosting,functions
+[debug] [2018-12-15T07:18:06.295Z] CLI Version:   6.1.2
+[debug] [2018-12-15T07:18:06.295Z] Platform:      darwin
+[debug] [2018-12-15T07:18:06.295Z] Node Version:  v10.11.0
+[debug] [2018-12-15T07:18:06.296Z] Time:          Sat Dec 15 2018 15:18:06 GMT+0800 (GMT+08:00)
+[debug] [2018-12-15T07:18:06.296Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-12-15T07:18:06.309Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-12-15T07:18:06.309Z] > authorizing via signed-in user
+[debug] [2018-12-15T07:18:06.310Z] [iam] checking project mike-test-49433 for permissions ["firebase.projects.get"]
+[debug] [2018-12-15T07:18:06.312Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/mike-test-49433:testIamPermissions  
+
+[debug] [2018-12-15T07:18:07.375Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-15T07:18:07.377Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/mike-test-49433  
+ 
+[debug] [2018-12-15T07:18:08.381Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/wellwind/GitHub/angular-universal-firebase'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-12-15T07:18:09.023Z] Fetching environment
+[debug] [2018-12-15T07:18:09.026Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/860520775920:getServerAppConfig  
+ 
+[debug] [2018-12-15T07:18:09.026Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/860520775920/clients/_:getWebAppConfig  
+ 
+[debug] [2018-12-15T07:18:09.347Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-15T07:18:09.348Z] Starting @google-cloud/functions-emulator
+[debug] [2018-12-15T07:18:09.501Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: functions/public/browser
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2018-12-15T07:18:10.926Z] Parsing function triggers
+[info] ✔  functions: ssr: http://localhost:5001/mike-test-49433/us-central1/ssr
+[info] [hosting] Rewriting /demo to local function ssr
